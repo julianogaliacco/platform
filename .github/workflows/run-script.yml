@@ -3,9 +3,17 @@ name: Run Script (reusable)
 on:
   workflow_call:
     inputs:
-      arg1:
-        description: "Argumento opcional para o script"
-        required: false
+      param1:
+        required: true
+        type: string
+      param2:
+        required: true
+        type: string
+      param3:
+        required: true
+        type: string
+      param4:
+        required: true
         type: string
 
 jobs:
@@ -13,15 +21,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do repositório B
+      - name: Checkout do repo B
         uses: actions/checkout@v4
         with:
           # força checkout do repo B mesmo quando chamado de outro repo
-          repository: julianogaliacco/platform
+          repository: julianogaliacco/platform          
           ref: main
 
-      - name: Dar permissão ao script
+      - name: Permissão para o script
         run: chmod +x ./scripts/meu-script.sh
 
-      - name: Executar o script
-        run: ./scripts/meu-script.sh "${{ inputs.arg1 }}"
+      - name: Executar script com os 4 parâmetros
+        run: |
+          ./scripts/meu-script.sh \
+            "${{ inputs.param1 }}" \
+            "${{ inputs.param2 }}" \
+            "${{ inputs.param3 }}" \
+            "${{ inputs.param4 }}"
