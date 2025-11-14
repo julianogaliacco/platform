@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
-
-# Fail fast
 set -euo pipefail
 
-echo "=== Iniciando execução do meu-script.sh ==="
+echo "=== Script iniciado ==="
 
-echo "Quantidade de parâmetros recebidos: $#"
-echo "Lista completa de parâmetros: $@"
+echo "Param1: $1"
+echo "Param2: $2"
+echo "Param3: $3"
+echo "Param4: $4"
 
-# Exibindo cada parâmetro individualmente
-i=1
-for arg in "$@"; do
-  echo "Parâmetro $i: $arg"
-  i=$((i+1))
-done
+echo "Todos os parâmetros: $@"
+echo "Total: $#"
 
-echo "=== Finalizado ==="
+echo "=== Script finalizado ==="
 
