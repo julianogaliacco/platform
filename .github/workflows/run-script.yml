@@ -1,0 +1,27 @@
+name: Run Script (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      arg1:
+        description: "Argumento opcional para o script"
+        required: false
+        type: string
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório B
+        uses: actions/checkout@v4
+        with:
+          # força checkout do repo B mesmo quando chamado de outro repo
+          repository: ORG/REPO-B
+          ref: main
+
+      - name: Dar permissão ao script
+        run: chmod +x ./scripts/meu-script.sh
+
+      - name: Executar o script
+        run: ./scripts/meu-script.sh "${{ inputs.arg1 }}"
